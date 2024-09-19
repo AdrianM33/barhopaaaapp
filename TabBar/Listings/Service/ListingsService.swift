@@ -26,8 +26,8 @@ class ListingsService: ObservableObject {
 
     func fetchListings(completion: @escaping ([Listing]) -> ()) {
         // Set up a real-time listener for the EventListingsCollection
-        completion(DeveloperPreview.shared.listings)
-        return;
+        //completion(DeveloperPreview.shared.listings)
+        //return;
         listenerRegistration = FirestoreConstants.ListingsCollection.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -52,10 +52,28 @@ class ListingsService: ObservableObject {
     // arcopo
     /// Here we can add functions to add me to a listing, and remove me from going to a listing
     
-    func addUserGoing(listing:Listing){
+    func updateUserIsGoing(for listing: Listing, isGoing: Bool) async throws -> (Bool) {
+        // Call to backend to update the user's attendance for the event
+        // This could involve Firebase Firestore or any other API
+        // Example (Firestore):
+        //return true
+        let db = Firestore.firestore()
         
-    }
-    func removeUserGoing(listing:Listing){
+        let currentUser = try await UserService().fetchCurrentUser()
+    
+        let friendObject = Friend.userTofirebaseFriend(user: currentUser)
         
+        if isGoing {
+            try await FirestoreConstants.ListingsCollection.document(listing.id).updateData([
+                "goingUsers": FieldValue.arrayUnion([friendObject])
+            ])
+        } else {
+            try await FirestoreConstants.ListingsCollection.document(listing.id).updateData([
+                "goingUsers": FieldValue.arrayRemove([friendObject])
+            ])
+        }
+        print("User added successfully")
+        return true
+         
     }
 }

@@ -4,6 +4,7 @@ import CoreLocation
 class ListingsViewModel: ObservableObject {
     
     @Published var listings = [Listing]()
+    
     private let service: ListingsService
     private var locationViewModel: LocationViewModel
 
@@ -52,11 +53,11 @@ class ListingsViewModel: ObservableObject {
                 
                 listings[index].userIsGoing.toggle()
                 let going = listings[index].userIsGoing
-                /*
+                
                 // Update backend
                 Task {
-                    try await service.updateUserIsGoing(for: eventListings[index], isGoing: eventListings[index].userIsGoing)
-                }*/
+                    try await service.updateUserIsGoing(for: listings[index], isGoing: listings[index].userIsGoing)
+                }
                     
             }
         }

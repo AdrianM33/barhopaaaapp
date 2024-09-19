@@ -53,14 +53,16 @@ struct ListingsView: View {
                     Spacer()
                     
                     ScrollView {
-                        LazyVStack(spacing: 20) {
-                            ForEach(viewModel.listings) { listing in
+                        VStack(spacing: 20) {
+                            ForEach(0..<viewModel.listings.count, id: \.self) { i in
                                 
                                 NavigationLink(
-                                    destination: ListingDetailView(listing: listing)
-                                        .navigationBarHidden(true), // Hide the navigation bar
+                                    destination: ListingDetailView(listing: $viewModel.listings[i])
+                                        .environmentObject(viewModel)
+                                        .navigationBarHidden(true),
+                                        
                                     label: {
-                                        ListingRowView(listing: listing)
+                                        ListingRowView(listing: $viewModel.listings[i])
                                             .frame(height: 200)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .shadow(color: Color.black.opacity(0.2), radius: 6, x: 0, y: 10)
@@ -68,7 +70,7 @@ struct ListingsView: View {
                                     }
                                 )
                             }
-                        }.id(UUID())
+                        }//.id(UUID())
                     }
                 }
                 .background(

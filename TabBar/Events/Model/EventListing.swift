@@ -73,10 +73,11 @@ class EventListing: ObservableObject, Identifiable {
         }
         
         let goingUsers = data["goingUsers"] as? [[String:String]] ?? []
-        let userIsGoing = goingUsers.contains(where: { $0["id"] == UserService().localCurrentUserId() })
-        let friendsGoing = goingUsers.map({Friend(id: $0["id"] ?? "", name: $0["username"] ?? "", imageName: $0["profileImageURL"] ?? "")})
+        let friendsGoing = goingUsers.map({Friend.from(object: $0)})
+        let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
         // arcopo
         /// Only show if not me and my friend
+        ///
         return EventListing(id: document.documentID, username: username, followers: followers, following: following, imageURL: imageURL, title: title, date: date, location: location, price: price, time: time, isLiked: true, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
         
     }

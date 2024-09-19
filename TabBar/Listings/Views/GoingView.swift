@@ -2,27 +2,31 @@ import SwiftUI
 
 struct GoingView: View {
     
-    @State var isPressed: Bool
+    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var listing: Listing
     
+    // arcopo
+    /// need to pas the viewmodel here
     let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect() // Check every minute
 
     var body: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.7)) {
-                self.isPressed.toggle()
+                //self.listing.userIsGoing.toggle()
+                self.viewModel.toggleUserIsGoing(for: self.listing)
             }
         }) {
             Text("Going")
-                .fontWeight(isPressed ? .bold : .regular)
-                .foregroundColor(isPressed ? .white : .red)
+                .fontWeight(listing.userIsGoing ? .bold : .regular)
+                .foregroundColor(listing.userIsGoing ? .white : .red)
                 .padding()
                 .frame(height: 40)
                 .background(backgroundView)
                 .cornerRadius(10)
-                .scaleEffect(isPressed ? 1.0 : 1.0)
+                .scaleEffect(listing.userIsGoing ? 1.0 : 1.0)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(isPressed ? Color.white : Color.red, lineWidth: 2)
+                        .stroke(listing.userIsGoing ? Color.white : Color.red, lineWidth: 2)
                 )
         }
         .onReceive(timer) { _ in
@@ -33,11 +37,11 @@ struct GoingView: View {
     var backgroundView: some View {
         ZStack {
             Color.white
-            if isPressed {
+            if listing.userIsGoing {
                 LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
             }
         }
-        .animation(.easeInOut(duration: 0.7), value: isPressed)
+        .animation(.easeInOut(duration: 0.7), value: listing.userIsGoing)
     }
 
     private func checkForReset() {
@@ -49,7 +53,7 @@ struct GoingView: View {
         // Check if current time is at or past 2 AM and before 2:01 AM (to avoid multiple resets)
         if hour == 2 && minute == 30 {
             withAnimation(.easeInOut(duration: 0.7)) {
-                isPressed = false
+                listing.userIsGoing = false
             }
         }
     }

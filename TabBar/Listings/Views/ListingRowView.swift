@@ -1,15 +1,16 @@
 import SwiftUI
+import Kingfisher
 
 struct ListingRowView: View {
     
     @EnvironmentObject var viewModel: ListingsViewModel
-    @ObservedObject var listing: Listing
+    @Binding var listing: Listing
     
     var body: some View {
         
         HStack(spacing: 0) {
             ZStack(alignment: .topTrailing) { // Use alignment to position the button
-                Image("\(listing.busImageUrl)")
+                KFImage(URL(string: listing.busImageUrl))
                     .resizable()
                     .scaledToFill()
                     .frame(width: 190, height: 200)

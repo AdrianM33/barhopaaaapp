@@ -32,7 +32,7 @@ struct MapView: View {
         VStack {
             ZStack(alignment: .topLeading) {
                 ZStack(alignment: .bottom) {
-                    Map(coordinateRegion: $region, annotationItems: filteredListings, annotationContent: { listing in
+                    Map(coordinateRegion: $region, annotationItems: viewModel.listings.filter { searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased()) }, annotationContent: { listing in
                         
                         MapAnnotation(coordinate: listing.coordinates) {
                             Circle()
@@ -60,7 +60,14 @@ struct MapView: View {
                 }
                 .fullScreenCover(isPresented: $showDetails) {
                     if let selectedListing = selectedListing {
-                        ListingDetailView(listing: selectedListing)
+                        ListingDetailView(listing: Binding(get: {
+                            selectedListing
+                        }, set: { newListing in
+                            if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
+                                viewModel.listings[index] = newListing  // Update the selected listing
+                            }
+                        }))
+                        .environmentObject(viewModel)
                     }
                 }
                 
@@ -69,15 +76,9 @@ struct MapView: View {
                     .padding()
             }
         }
+        
     }
     
-    private var filteredListings: [Listing] {
-        if searchText.isEmpty {
-            return viewModel.listings
-        } else {
-            return viewModel.listings.filter { $0.title.lowercased().contains(searchText.lowercased()) }
-        }
-    }
 }
 
 // Preview

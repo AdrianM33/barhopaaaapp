@@ -16,13 +16,14 @@ class Listing: ObservableObject, Identifiable {
     let address: String
     let city: String
     let state: String
-    let title: String // Note: You might want to change this to lowercase "title" for consistency
+    @Published var title: String // Note: You might want to change this to lowercase "title" for consistency
     var rating: Double
     var friends: Int
     var openingHours: [OpeningHour]
     var venueType: String
     var venueMusic: String
     
+    var friendsGoing: [Friend]
     @Published var userIsGoing: Bool = false {
         didSet {
             
@@ -33,7 +34,7 @@ class Listing: ObservableObject, Identifiable {
         return .init(latitude: latitude, longitude: longitude)
     }
     
-    init(id: String, businessUid: String, busImageUrl: String, happyHour: String, userAttendance: Int, openHours: Int, latitude: Double, longitude: Double, imageURLs: [String], address: String, city: String, state: String, title: String, rating: Double, friends: Int, openingHours: [OpeningHour], venueType: String, venueMusic: String) {
+    init(id: String, businessUid: String, busImageUrl: String, happyHour: String, userAttendance: Int, openHours: Int, latitude: Double, longitude: Double, imageURLs: [String], address: String, city: String, state: String, title: String, rating: Double, friends: Int, openingHours: [OpeningHour], venueType: String, venueMusic: String, userIsGoing: Bool = false, friendsGoing: [Friend] = []) {
         self.id = id
         self.businessUid = businessUid
         self.busImageUrl = busImageUrl
@@ -52,6 +53,8 @@ class Listing: ObservableObject, Identifiable {
         self.openingHours = openingHours
         self.venueType = venueType
         self.venueMusic = venueMusic
+        self.userIsGoing = userIsGoing
+        self.friendsGoing = friendsGoing
     }
     
     static func from(document:QueryDocumentSnapshot) -> Listing? {
@@ -79,7 +82,13 @@ class Listing: ObservableObject, Identifiable {
             print("Error parsing document data")
             return nil
         }
-        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: userAttendance, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, friends: 4, openingHours: [], venueType: venueType, venueMusic: venueMusic)
+        
+        let goingUsers = data["goingUsers"] as? [[String:String]] ?? []
+        
+        let friendsGoing = goingUsers.map({Friend.from(object: $0)})
+        let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
+        
+        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: userAttendance, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, friends: 4, openingHours: [], venueType: venueType, venueMusic: venueMusic, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
        
     }
     

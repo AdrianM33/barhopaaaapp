@@ -67,9 +67,9 @@ struct ListingsSearchbarView: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
                                 ForEach(filteredListings(for: "bar"), id: \.id) { bar in
-                                    NavigationLink(destination: ListingDetailView(listing: bar).navigationBarBackButtonHidden(true)) {
-                                        ListingsSearchListingView(listing: bar)
-                                    }
+//                                    NavigationLink(destination: ListingDetailView(listing: bar).navigationBarBackButtonHidden(true)) {
+//                                        ListingsSearchListingView(listing: bar)
+//                                    }
                                 }
                             }
                         }
@@ -83,9 +83,10 @@ struct ListingsSearchbarView: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
                                 ForEach(filteredListings(for: "club"), id: \.id) { club in
-                                    NavigationLink(destination: ListingDetailView(listing: club).navigationBarBackButtonHidden(true)) {
-                                        ListingsSearchListingView(listing: club)
-                                    }
+                                    
+ //                                   NavigationLink(destination: ListingDetailView(listing: club).navigationBarBackButtonHidden(true)) {
+ //                                       ListingsSearchListingView(listing: club)
+ //                                   }
                                 }
                             }
                         }

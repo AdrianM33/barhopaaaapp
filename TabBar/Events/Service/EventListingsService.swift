@@ -35,8 +35,8 @@ class EventListingsService: ObservableObject {
     */
     func fetchListings(completion: @escaping ([EventListing]) -> ()) {
         // Set up a real-time listener for the EventListingsCollection
-        completion(EventPreview.shared.events)
-        return;
+        //completion(EventPreview.shared.events)
+        //return;
         listenerRegistration = FirestoreConstants.EventListingsCollection.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -67,15 +67,12 @@ class EventListingsService: ObservableObject {
         // Call to backend to update the user's attendance for the event
         // This could involve Firebase Firestore or any other API
         // Example (Firestore):
-        return true
+        //return true
         let db = Firestore.firestore()
         
         let currentUser = try await UserService().fetchCurrentUser()
-        let friendObject = [
-            "id":currentUser?.id,
-            "username":currentUser?.username,
-            "profileImageURL":currentUser?.profileImageUrl
-        ]
+    
+        let friendObject = Friend.userTofirebaseFriend(user: currentUser)
         
         if isGoing {
             try await FirestoreConstants.EventListingsCollection.document(listing.id).updateData([

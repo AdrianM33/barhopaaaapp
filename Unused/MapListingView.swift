@@ -46,7 +46,7 @@ struct MapListingView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(width: 360, height: 220)
-        .background(NavigationLink("", destination: ListingDetailView(listing: listing), isActive: $isTapped).hidden())
+ //       .background(NavigationLink("", destination: ListingDetailView(listing: listing), isActive: $isTapped).hidden())
         .onTapGesture {
             isTapped = true
             

@@ -466,7 +466,6 @@
 				6120898A2BA292DE00AA2A74 /* Directionbuttonview.swift */,
 				619178972B99F60800D90009 /* OpeningHoursView.swift */,
 				612089622B9DC9B800AA2A74 /* StarView.swift */,
-				612089642B9DD05900AA2A74 /* GoingView.swift */,
 				612089882BA1D92000AA2A74 /* EventDetailButtonView.swift */,
 			);
 			path = Subviews;
@@ -716,6 +715,7 @@
 				61B0A6032B80D95900AFAC41 /* ListingRowView.swift */,
 				619178952B99F2A400D90009 /* ListingDetailView.swift */,
 				612089842BA17E4800AA2A74 /* FriendsGoingOverlayView.swift */,
+				612089642B9DD05900AA2A74 /* GoingView.swift */,
 				228E5B812C9B1983000EA081 /* Search */,
 				228E5B7D2C9B0FE8000EA081 /* Subviews */,
 			);

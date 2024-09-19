@@ -20,4 +20,21 @@ struct Friend: Identifiable, Equatable {
     var id: String
     var name: String
     var imageName: String
+    
+    static func from(object: [String:String]) -> Friend {
+        return Friend(
+            id: object["id"] ?? "",
+            name: object["username"] ?? "",
+            imageName: object["profileImageURL"] ?? ""
+        )
+    }
+    
+    static func userTofirebaseFriend(user: User?) -> [String:String?] {
+        let friendObject = [
+            "id":user?.id,
+            "username":user?.username,
+            "profileImageURL":user?.profileImageUrl
+        ]
+        return friendObject
+    }
 }

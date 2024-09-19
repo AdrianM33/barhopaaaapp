@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import Kingfisher
 
 // arcopo
 /// This is the listing detail view that shows up when a user taps on the listing on the homepage
@@ -14,9 +15,13 @@ struct ListingDetailView: View {
     @State private var showFriendsGoingOverlay = false
     
     @Environment(\.dismiss) var dismiss
-    @StateObject var listing: Listing
+    
+    @EnvironmentObject var viewModel: ListingsViewModel
+    @Binding var listing: Listing
+    //@StateObject var listing: Listing
     
     var body: some View {
+        
         ScrollView {
             VStack {
                 
@@ -24,14 +29,14 @@ struct ListingDetailView: View {
                     GeometryReader { geometry in
                         ZStack {
                             if geometry.frame(in: .global).minY <= 0 {
-                                Image(listing.busImageUrl)
+                                KFImage(URL(string: listing.busImageUrl))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: geometry.size.width, height: 320)
                                     .offset(y: geometry.frame(in: .global).minY/9)
                                     .clipped()
                             } else {
-                                Image(listing.busImageUrl)
+                                KFImage(URL(string: listing.busImageUrl))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: geometry.size.width, height: 320 + geometry.frame(in: .global).minY)
@@ -41,7 +46,7 @@ struct ListingDetailView: View {
                         }
                     }
                     .frame(height: 320)
-                    
+ 
                     // Back Button
                     Button(action: {
                         dismiss()
@@ -59,14 +64,15 @@ struct ListingDetailView: View {
                     // GoingView added to the top right
                     HStack {
                         Spacer()
-                        GoingView(isPressed: listing.userIsGoing) // Your GoingView component
+                        GoingView(listing: listing) // Your GoingView component
                             .padding(.top, -25)
                             .padding(.trailing, 20)
+                            .environmentObject(viewModel)
                     }
                 }
                 .frame(height: 500)
                 
-                
+    
                 // Details Section
                 Group {
                     VStack(alignment: .center, spacing: 8) {
@@ -170,9 +176,9 @@ struct ListingDetailView: View {
                 
                 // Divider
                 Divider()
-                 
+  
             }
-            
+ 
             // Opening Hours Section
             Group {
                 VStack {
@@ -331,7 +337,7 @@ struct ListingDetailView: View {
                 }
                 
             }
-            
+  
             
         }
         .sheet(isPresented: $showFriendsGoingOverlay) {
