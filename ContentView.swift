@@ -21,6 +21,7 @@ struct ContentView: View {
                 if let user = viewModel.currentUser {
                     MainTabBar(authService: authService, user: user)
                         .environmentObject(viewModel)
+                        .environmentObject(locationViewModel)
                 }
             } else {
                 LoginViews(authService: authService)

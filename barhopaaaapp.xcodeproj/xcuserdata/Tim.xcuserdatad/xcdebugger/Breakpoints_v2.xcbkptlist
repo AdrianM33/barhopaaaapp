@@ -243,34 +243,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F7D55E1C-A31B-40B8-8DD5-64ACC0FB9C14 - 89829095826e07dc"
+                  uuid = "F7D55E1C-A31B-40B8-8DD5-64ACC0FB9C14 - 782fdf0386ef4263"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(5) suspend resume partial function for barhopaaaapp.EventListingsService.updateUserIsGoing(for: barhopaaaapp.EventListing, isGoing: Swift.Bool) async throws -&gt; Swift.Bool"
                   moduleName = "barhopaaaapp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tim/Developer/iOS%20Work/BarHop/barhopaaaapp/TabBar/Events/Service/EventListingsService.swift"
+                  urlString = "file:///Users/Tim/Developer/iOS%20Work/BarHop/BarHoppa/TabBar/Events/Service/EventListingsService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "417">
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "220">
                </Location>
                <Location
-                  uuid = "F7D55E1C-A31B-40B8-8DD5-64ACC0FB9C14 - f9d4f9ae3264f3da"
+                  uuid = "F7D55E1C-A31B-40B8-8DD5-64ACC0FB9C14 - 879b63836e5b665"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(7) suspend resume partial function for barhopaaaapp.EventListingsService.updateUserIsGoing(for: barhopaaaapp.EventListing, isGoing: Swift.Bool) async throws -&gt; Swift.Bool"
                   moduleName = "barhopaaaapp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Tim/Developer/iOS%20Work/BarHop/barhopaaaapp/TabBar/Events/Service/EventListingsService.swift"
+                  urlString = "file:///Users/Tim/Developer/iOS%20Work/BarHop/BarHoppa/TabBar/Events/Service/EventListingsService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "417">
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "220">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -525,8 +525,8 @@
             filePath = "TabBar/Listings/Views/ListingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -575,7 +575,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "11"
                   endingLineNumber = "11"
-                  offsetFromSymbolStart = "140">
+                  offsetFromSymbolStart = "160">
                </Location>
                <Location
                   uuid = "8D9821BC-343E-4342-B976-C495770381D4 - 430b35e33ef38e7e"
@@ -590,7 +590,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "462">
+                  offsetFromSymbolStart = "479">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -605,8 +605,8 @@
             filePath = "TabBar/Map/Views/MapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -653,8 +653,8 @@
             filePath = "TabBar/Map/Views/MapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>

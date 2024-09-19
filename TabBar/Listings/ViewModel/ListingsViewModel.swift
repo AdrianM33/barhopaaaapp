@@ -56,7 +56,7 @@ class ListingsViewModel: ObservableObject {
                 
                 // Update backend
                 Task {
-                    try await service.updateUserIsGoing(for: listings[index], isGoing: listings[index].userIsGoing)
+                    try await service.updateUserIsGoing(for: listings[index], isGoing: going)
                 }
                     
             }

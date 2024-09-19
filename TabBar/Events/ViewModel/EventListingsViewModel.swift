@@ -42,7 +42,7 @@ class EventListingsViewModel: ObservableObject {
                 
                 // Update backend
                 Task {
-                    try await service.updateUserIsGoing(for: eventListings[index], isGoing: eventListings[index].userIsGoing)
+                    try await service.updateUserIsGoing(for: eventListings[index], isGoing: going)
                 }
                     
                     /*.updateUserIsGoing(for: eventListings[index], isGoing: eventListings[index].userIsGoing) { result in

@@ -1,10 +1,10 @@
 import SwiftUI
 import MapKit
+import Kingfisher
 
 struct MapViewListingDetail: View {
     
-    
-    let listing: Listing
+    @ObservedObject var listing: Listing
     
     var body: some View {
         
@@ -18,7 +18,7 @@ struct MapViewListingDetail: View {
             
             // Content overlay
             VStack(alignment: .leading, spacing: 4) {
-                Image(listing.busImageUrl)
+                KFImage(URL(string: listing.busImageUrl))
                     .resizable()
                     .scaledToFill()
                     .frame(width: 400, height: 200)
@@ -63,9 +63,11 @@ struct MapViewListingDetail: View {
     }
 }
 
+/*
 // Example PreviewProvider adjusted according to your Listing struct
 struct ListingsMapScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MapViewListingDetail(listing: DeveloperPreview.shared.listings[0])
     }
 }
+*/

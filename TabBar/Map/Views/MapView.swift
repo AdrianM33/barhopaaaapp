@@ -4,7 +4,7 @@ import MapKit
 struct MapView: View {
     
     
-    @StateObject var viewModel: ListingsViewModel
+    @EnvironmentObject var viewModel: ListingsViewModel
     
     @State private var isGoingSelected = false
     
@@ -13,7 +13,8 @@ struct MapView: View {
         latitudinalMeters: 5000,
         longitudinalMeters: 5000)
     
-    @State private var selectedListing: Listing?
+    @State private var selectedListingIndex: Int?
+    
     @State private var showDetails = false
     @State private var searchText = ""
     
@@ -39,10 +40,12 @@ struct MapView: View {
                                 .stroke(Color.blue, lineWidth: 8)
                                 .frame(width: 20, height: 20)
                                 .onTapGesture {
-                                    selectedListing = listing
+                                    selectedListingIndex = viewModel.listings.firstIndex(of: listing)
                                 }
                         }
                     })
+                    
+                
                     /*
                      // Removed for xcode back compatibility
                     Map(position: $cameraPosition, selection: $selectedListing) {
@@ -51,22 +54,16 @@ struct MapView: View {
                                 .tag(listing.id)
                         }
                     }*/
-                    if let selectedListing = selectedListing {
-                        MapViewListingDetail(listing: selectedListing)
+                    if let selectedListingIndex {
+                        MapViewListingDetail(listing: viewModel.listings[selectedListingIndex])
                             .onTapGesture {
                                 showDetails.toggle()
                             }
                     }
                 }
                 .fullScreenCover(isPresented: $showDetails) {
-                    if let selectedListing = selectedListing {
-                        ListingDetailView(listing: Binding(get: {
-                            selectedListing
-                        }, set: { newListing in
-                            if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                viewModel.listings[index] = newListing  // Update the selected listing
-                            }
-                        }))
+                    if let selectedListingIndex {
+                        ListingDetailView(listing: $viewModel.listings[selectedListingIndex])
                         .environmentObject(viewModel)
                     }
                 }
@@ -84,6 +81,7 @@ struct MapView: View {
 // Preview
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(viewModel: ListingsViewModel(service: ListingsService(), locationViewModel: LocationViewModel()))
+        MapView()
+            .environmentObject(ListingsViewModel(service: ListingsService(), locationViewModel: LocationViewModel()))
     }
 }

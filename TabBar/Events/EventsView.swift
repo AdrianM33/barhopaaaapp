@@ -12,8 +12,8 @@ import SwiftUI
 
 struct EventsView: View {
     
-    @StateObject var locationViewModel = LocationViewModel()
-    @StateObject var viewModel: EventListingsViewModel
+    @EnvironmentObject var locationViewModel: LocationViewModel
+    @EnvironmentObject var viewModel: EventListingsViewModel
     
     var body: some View {
         VStack {
@@ -69,6 +69,7 @@ struct EventsView: View {
 
 struct EventsView_Previews: PreviewProvider {
     static var previews: some View {
-        EventsView(viewModel: EventListingsViewModel(service: EventListingsService(), locationViewModel: LocationViewModel()))
+        EventsView()
+            .environmentObject(EventListingsViewModel(service: EventListingsService(), locationViewModel: LocationViewModel()))
     }
 }
