@@ -45,7 +45,10 @@ class ListingsService: ObservableObject {
             self.listings = snapshot.documents.compactMap { document -> Listing? in
                 return Listing.from(document: document)
             }
-            completion(self.listings)
+            DispatchQueue.main.async {
+                completion(self.listings)
+            }
+            
         }
     }
     
@@ -56,7 +59,7 @@ class ListingsService: ObservableObject {
         // Call to backend to update the user's attendance for the event
         // This could involve Firebase Firestore or any other API
         // Example (Firestore):
-        //return true
+        return true
  
         let currentUser = try await UserService().fetchCurrentUser()
     

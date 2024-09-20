@@ -4,7 +4,7 @@ import Kingfisher
 
 struct MapViewListingDetail: View {
     
-    @ObservedObject var listing: Listing
+    @Binding var listing: Listing
     
     var body: some View {
         

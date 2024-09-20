@@ -118,6 +118,14 @@ struct ListingDetailView: View {
                         // arcopo
                         /// This is where the images for going friends will display
                         ///
+                        
+                        FriendsGoingView(friendsGoing: listing.friendsGoing, maxVisibleFriends: 1).onTapGesture {
+                            withAnimation {
+                                showFriendsGoingOverlay.toggle()
+                            }
+                        }
+                   
+                        /*
                         Image("male") // First image
                             .resizable()
                             .scaledToFill()
@@ -145,7 +153,7 @@ struct ListingDetailView: View {
                                     showFriendsGoingOverlay.toggle()
                                 }
                             }
-                        
+                        */
                         
                         
                         Image("person")
@@ -341,7 +349,7 @@ struct ListingDetailView: View {
             
         }
         .sheet(isPresented: $showFriendsGoingOverlay) {
-            FriendsGoingOverlayView(friends: mockFriendsGoing) // Replace `mockFriendsGoing` with your actual data variable
+            FriendsGoingOverlayView(friends: listing.friendsGoing) // Replace `mockFriendsGoing` with your actual data variable
         }
         .ignoresSafeArea()
         .padding(.bottom)

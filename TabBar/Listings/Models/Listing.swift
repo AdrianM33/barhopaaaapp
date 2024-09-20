@@ -1,23 +1,25 @@
+
+import SwiftUI
 import Foundation
 import CoreLocation
 import FirebaseFirestore
 
-class Listing: ObservableObject, Identifiable {
+struct Listing: Identifiable {
     
-    @Published var id: String
-    @Published var businessUid: String
-    @Published var busImageUrl: String
-    @Published var happyHour: String
-    @Published var userAttendance: Int
-    @Published var openHours: Int
-    @Published var latitude: Double
-    @Published var longitude: Double
-    @Published var imageURLs: [String]
-    @Published var address: String
-    @Published var city: String
-    @Published var state: String
-    @Published var title: String // Note: You might want to change this to lowercase "title" for consistency
-    @Published var rating: Double
+    let id: String
+    let businessUid: String
+     var busImageUrl: String
+     var happyHour: String
+     var userAttendance: Int
+     var openHours: Int
+     var latitude: Double
+     var longitude: Double
+     var imageURLs: [String]
+     var address: String
+     var city: String
+     var state: String
+     var title: String // Note: You might want to change this to lowercase "title" for consistency
+     var rating: Double
 
     var openingHours: [OpeningHour]
     var venueType: String
@@ -25,7 +27,7 @@ class Listing: ObservableObject, Identifiable {
     
     var friendsGoing: [Friend]
     
-    @Published var userIsGoing: Bool = false {
+    var userIsGoing: Bool = false {
         didSet {
             
         }
@@ -35,27 +37,7 @@ class Listing: ObservableObject, Identifiable {
         return .init(latitude: latitude, longitude: longitude)
     }
     
-    init(id: String, businessUid: String, busImageUrl: String, happyHour: String, userAttendance: Int, openHours: Int, latitude: Double, longitude: Double, imageURLs: [String], address: String, city: String, state: String, title: String, rating: Double, openingHours: [OpeningHour], venueType: String, venueMusic: String, userIsGoing: Bool = false, friendsGoing: [Friend] = []) {
-        self.id = id
-        self.businessUid = businessUid
-        self.busImageUrl = busImageUrl
-        self.happyHour = happyHour
-        self.userAttendance = userAttendance
-        self.openHours = openHours
-        self.latitude = latitude
-        self.longitude = longitude
-        self.imageURLs = imageURLs
-        self.address = address
-        self.city = city
-        self.state = state
-        self.title = title
-        self.rating = rating
-        self.openingHours = openingHours
-        self.venueType = venueType
-        self.venueMusic = venueMusic
-        self.userIsGoing = userIsGoing
-        self.friendsGoing = friendsGoing
-    }
+
     
     static func from(document:QueryDocumentSnapshot) -> Listing? {
         
@@ -88,7 +70,7 @@ class Listing: ObservableObject, Identifiable {
         let friendsGoing = goingUsers.map({Friend.from(object: $0)})
         let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
         
-        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: friendsGoing.count, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, openingHours: [], venueType: venueType, venueMusic: venueMusic, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
+        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: friendsGoing.count, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, openingHours: [], venueType: venueType, venueMusic: venueMusic, friendsGoing: friendsGoing, userIsGoing: userIsGoing)
        
     }
     
@@ -117,6 +99,6 @@ extension Listing: Equatable {
 
 extension Listing {
     static var preview: Listing {
-        Listing(id: "1", businessUid: "business1", busImageUrl: "busImageUrl", happyHour: "Happy Hour", userAttendance: 10, openHours: 8, latitude: -37.8136, longitude: 144.9631, imageURLs: [], address: "123 Street", city: "Sample City", state: "Sample State", title: "Sample Title", rating: 4.5, openingHours: [], venueType: "Bar", venueMusic: "Jazz")
+        Listing(id: "1", businessUid: "business1", busImageUrl: "busImageUrl", happyHour: "Happy Hour", userAttendance: 10, openHours: 8, latitude: -37.8136, longitude: 144.9631, imageURLs: [], address: "123 Street", city: "Sample City", state: "Sample State", title: "Sample Title", rating: 4.5, openingHours: [], venueType: "Bar", venueMusic: "Jazz", friendsGoing: [])
     }
 }

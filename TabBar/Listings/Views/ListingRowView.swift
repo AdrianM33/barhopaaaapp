@@ -4,7 +4,7 @@ import Kingfisher
 struct ListingRowView: View {
     
     @EnvironmentObject var viewModel: ListingsViewModel
-    @ObservedObject var listing: Listing
+    @Binding var listing: Listing
     
     var body: some View {
         
@@ -79,17 +79,23 @@ struct ListingRowView: View {
                 /// This is the little widget showing who is attending the event
                 
                 HStack(spacing: 4) {
-                    Image("male")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 30, height: 30)
-                        .clipShape(Circle())
-                        .foregroundColor(.black)
-                        
                     
-                    Text("+4 Others")
-                        .font(.subheadline)
-                        .foregroundColor(.black)
+                    if let first = listing.friendsGoing.first {
+                        KFImage(URL(string: first.imageName))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 30, height: 30)
+                            .clipShape(Circle())
+                            .foregroundColor(.black)
+                    }
+                    
+                    if listing.friendsGoing.count > 1 {
+                        Text("+\(listing.friendsGoing.count-1) Others")
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                    }
+                    
+                    Spacer()
                     
                     /// This is the little widget showing total listing attendance
                     

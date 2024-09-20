@@ -17,7 +17,6 @@ class ListingsViewModel: ObservableObject {
     func fetchListings() {
         
         service.fetchListings { newListings in
-            
             self.listings = newListings
         }
     }

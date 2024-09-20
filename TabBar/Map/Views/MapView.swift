@@ -55,7 +55,7 @@ struct MapView: View {
                         }
                     }*/
                     if let selectedListingIndex {
-                        MapViewListingDetail(listing: viewModel.listings[selectedListingIndex])
+                        MapViewListingDetail(listing: $viewModel.listings[selectedListingIndex])
                             .onTapGesture {
                                 showDetails.toggle()
                             }

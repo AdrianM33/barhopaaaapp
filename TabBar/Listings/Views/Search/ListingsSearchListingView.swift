@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct ListingsSearchListingView: View {
     
@@ -6,7 +7,7 @@ struct ListingsSearchListingView: View {
 
     var body: some View {
         HStack(spacing: 10) { // Add spacing between image and texts
-            Image(listing.busImageUrl)
+            KFImage(URL(string: listing.busImageUrl))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60)

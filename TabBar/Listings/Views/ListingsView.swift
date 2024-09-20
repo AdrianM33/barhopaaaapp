@@ -54,21 +54,15 @@ struct ListingsView: View {
                     
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(viewModel.listings, id: \.id) { listing in
+                            ForEach($viewModel.listings) { $listing in
                                 
                                 NavigationLink(
-                                    destination: ListingDetailView(listing: Binding(get: {
-                                        listing
-                                    }, set: { newListing in
-                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                            viewModel.listings[index] = newListing  // Update the selected listing
-                                        }
-                                    }))
+                                    destination: ListingDetailView(listing: $listing)
                                         .environmentObject(viewModel)
                                         .navigationBarHidden(true),
                                         
                                     label: {
-                                        ListingRowView(listing: listing)
+                                        ListingRowView(listing: $listing)
                                             .frame(height: 200)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .shadow(color: Color.black.opacity(0.2), radius: 6, x: 0, y: 10)

@@ -17,9 +17,9 @@
 - Pull listings from firebase backend
 - EventsListingView.swift:3 For events
 
-- [ ] 5 Events ViewModel and Service setup
-- [ ] 6 Events setup
-- [ ] 7 Events connection
+- [-] 5 Events ViewModel and Service setup
+- [-] 6 Events setup
+- [-] 7 Events connection
 
 ## 'Going' functionality
 ### Events
@@ -32,7 +32,7 @@ This only shows up on one page in the app
 - The overlay will show the friends going to an event FriendsGoingOverlayView.swift:6
 250
 
-- [ ] 8 Events 'Going' setup
-- [ ] 9 Listings 'Going' setup
-- [ ] 10 Events 'Going' display
-- [ ] 11 Listings 'Going' display
+- [-] 8 Events 'Going' setup
+- [-] 9 Listings 'Going' setup
+- [-] 10 Events 'Going' display
+- [-] 11 Listings 'Going' display

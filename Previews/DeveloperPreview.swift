@@ -31,7 +31,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "12 PM - 3 AM")
             ],
             venueType: "Club",
-            venueMusic: "House"
+            venueMusic: "House",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -58,7 +59,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "11:30 AM - 1 AM")
             ],
             venueType: "Bar",
-            venueMusic: "R&B"
+            venueMusic: "R&B",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -85,7 +87,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "2 PM - 11 PM")
             ],
             venueType: "Bar",
-            venueMusic: "House"
+            venueMusic: "House",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -112,7 +115,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "3 PM - 10:45PM")
             ],
             venueType: "Bar",
-            venueMusic: "Jazz"
+            venueMusic: "Jazz",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -139,7 +143,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "5:30 PM - 1 AM")
             ],
             venueType: "Bar",
-            venueMusic: "House"
+            venueMusic: "House",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -166,7 +171,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "4 PM - 1 AM")
             ],
             venueType: "Bar",
-            venueMusic: "House"
+            venueMusic: "House",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -193,7 +199,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "Closed")
             ],
             venueType: "Club",
-            venueMusic: "Techno"
+            venueMusic: "Techno",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -220,7 +227,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "3 PM - 1 AM")
             ],
             venueType: "Bar",
-            venueMusic: "R&B"
+            venueMusic: "R&B",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -247,7 +255,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "Closed")
             ],
             venueType: "Club",
-            venueMusic: "R&B"
+            venueMusic: "R&B",
+            friendsGoing: []
         ),
         Listing(
             id: NSUUID().uuidString,
@@ -274,7 +283,8 @@ class DeveloperPreview {
                 OpeningHour(day: "Sunday", hours: "10 PM - 5 AM")
             ],
             venueType: "Club",
-            venueMusic: "House"
+            venueMusic: "House",
+            friendsGoing: []
         )
     ]
     

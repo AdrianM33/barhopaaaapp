@@ -3,7 +3,7 @@ import SwiftUI
 struct GoingView: View {
     
     @EnvironmentObject var viewModel: ListingsViewModel
-    @ObservedObject var listing: Listing
+    var listing: Listing
     
     // arcopo
     /// need to pas the viewmodel here
@@ -53,7 +53,7 @@ struct GoingView: View {
         // Check if current time is at or past 2 AM and before 2:01 AM (to avoid multiple resets)
         if hour == 2 && minute == 30 {
             withAnimation(.easeInOut(duration: 0.7)) {
-                listing.userIsGoing = false
+                //listing.userIsGoing = false
             }
         }
     }

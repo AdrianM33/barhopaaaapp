@@ -11,6 +11,12 @@ struct ListingsSearchbarView: View {
     /// need to observe these
     @EnvironmentObject var viewModel: ListingsViewModel
     
+    var clubs: [Binding<Listing>] {
+        return $viewModel.listings.filter({$0.wrappedValue.venueType == "Club" && (searchText.isEmpty || $0.wrappedValue.title.lowercased().contains(searchText.lowercased()))})
+    }
+    var bars: [Binding<Listing>] {
+        return $viewModel.listings.filter({$0.wrappedValue.venueType == "Bar" && (searchText.isEmpty || $0.wrappedValue.title.lowercased().contains(searchText.lowercased()))})
+    }
     
     var body: some View {
             NavigationView {
@@ -50,22 +56,9 @@ struct ListingsSearchbarView: View {
                         SectionHeaderView(title: "Bar")
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
-                                ForEach(viewModel.listings.filterBy(venueType: "bar", searchText: searchText), id: \.id) { bar in
-                                    NavigationLink(destination: ListingDetailView(listing: Binding(get: {
-                                        bar
-                                    }, set: { newListing in
-                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                            viewModel.listings[index] = newListing  // Update the selected listing
-                                        }
-                                    })).navigationBarBackButtonHidden(true)) {
-                                        ListingsSearchListingView(listing: Binding(
-                                                    get: { bar },
-                                                    set: { newListing in
-                                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                                            viewModel.listings[index] = newListing
-                                                        }
-                                                    }
-                                                ))
+                                ForEach(bars, id: \.id) { $bar in
+                                    NavigationLink(destination: ListingDetailView(listing: $bar).navigationBarBackButtonHidden(true)) {
+                                        ListingsSearchListingView(listing: $bar)
                                     }
                                 }
                             }
@@ -79,23 +72,10 @@ struct ListingsSearchbarView: View {
                         SectionHeaderView(title: "Club")
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
-                                ForEach(viewModel.listings.filterBy(venueType: "club", searchText: searchText), id: \.id) { club in
+                                ForEach(clubs, id: \.id) { $club in
                                     
-                                    NavigationLink(destination: ListingDetailView(listing: Binding(get: {
-                                        club
-                                    }, set: { newListing in
-                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                            viewModel.listings[index] = newListing  // Update the selected listing
-                                        }
-                                    })).navigationBarBackButtonHidden(true)) {
-                                        ListingsSearchListingView(listing: Binding(
-                                                    get: { club },
-                                                    set: { newListing in
-                                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
-                                                            viewModel.listings[index] = newListing
-                                                        }
-                                                    }
-                                                ))
+                                    NavigationLink(destination: ListingDetailView(listing: $club).navigationBarBackButtonHidden(true)) {
+                                        ListingsSearchListingView(listing: $club)
                                     }
                                 }
                             }

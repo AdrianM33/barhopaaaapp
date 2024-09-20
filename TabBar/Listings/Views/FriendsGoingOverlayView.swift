@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 // arcopo
 /// This is where we will display the friends who are going to a listing or event
@@ -22,9 +23,9 @@ struct FriendsGoingOverlayView: View {
                 ForEach(friends) { friend in
                     
                     HStack {
-                        Image(friend.imageName) // Ensure the image names correspond to actual assets in your project
+                        KFImage(URL(string: friend.imageName)) // Ensure the image names correspond to actual assets in your project
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 45, height: 45)
                             .clipShape(Circle())
                             .padding(4)
