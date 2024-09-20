@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct ListingsSearchListingView: View {
-    let listing: Listing
+    
+    @Binding var listing: Listing
 
     var body: some View {
         HStack(spacing: 10) { // Add spacing between image and texts
@@ -43,8 +44,10 @@ struct ListingsSearchListingView: View {
     }
 }
 
+/*
 struct ListingsSearchListingView_Previews: PreviewProvider {
     static var previews: some View {
         ListingsSearchListingView(listing: DeveloperPreview.shared.listings[0])
     }
 }
+*/

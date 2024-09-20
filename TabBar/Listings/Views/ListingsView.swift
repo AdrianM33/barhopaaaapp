@@ -17,7 +17,7 @@ struct ListingsView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: ListingsSearchbarView(listings: viewModel.listings).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: ListingsSearchbarView().environmentObject(viewModel).navigationBarBackButtonHidden(true)) {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
                                 .frame(width: 25, height: 25)

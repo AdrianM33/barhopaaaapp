@@ -56,9 +56,8 @@ class ListingsService: ObservableObject {
         // Call to backend to update the user's attendance for the event
         // This could involve Firebase Firestore or any other API
         // Example (Firestore):
-        return true
-        let db = Firestore.firestore()
-        
+        //return true
+ 
         let currentUser = try await UserService().fetchCurrentUser()
     
         let friendObject = Friend.userTofirebaseFriend(user: currentUser)

@@ -4,26 +4,27 @@ import FirebaseFirestore
 
 class Listing: ObservableObject, Identifiable {
     
-    var id: String
-    let businessUid: String
-    let busImageUrl: String
-    let happyHour: String
-    var userAttendance: Int
-    let openHours: Int
-    let latitude: Double
-    let longitude: Double
-    var imageURLs: [String]
-    let address: String
-    let city: String
-    let state: String
+    @Published var id: String
+    @Published var businessUid: String
+    @Published var busImageUrl: String
+    @Published var happyHour: String
+    @Published var userAttendance: Int
+    @Published var openHours: Int
+    @Published var latitude: Double
+    @Published var longitude: Double
+    @Published var imageURLs: [String]
+    @Published var address: String
+    @Published var city: String
+    @Published var state: String
     @Published var title: String // Note: You might want to change this to lowercase "title" for consistency
-    var rating: Double
-    var friends: Int
+    @Published var rating: Double
+
     var openingHours: [OpeningHour]
     var venueType: String
     var venueMusic: String
     
     var friendsGoing: [Friend]
+    
     @Published var userIsGoing: Bool = false {
         didSet {
             
@@ -34,7 +35,7 @@ class Listing: ObservableObject, Identifiable {
         return .init(latitude: latitude, longitude: longitude)
     }
     
-    init(id: String, businessUid: String, busImageUrl: String, happyHour: String, userAttendance: Int, openHours: Int, latitude: Double, longitude: Double, imageURLs: [String], address: String, city: String, state: String, title: String, rating: Double, friends: Int, openingHours: [OpeningHour], venueType: String, venueMusic: String, userIsGoing: Bool = false, friendsGoing: [Friend] = []) {
+    init(id: String, businessUid: String, busImageUrl: String, happyHour: String, userAttendance: Int, openHours: Int, latitude: Double, longitude: Double, imageURLs: [String], address: String, city: String, state: String, title: String, rating: Double, openingHours: [OpeningHour], venueType: String, venueMusic: String, userIsGoing: Bool = false, friendsGoing: [Friend] = []) {
         self.id = id
         self.businessUid = businessUid
         self.busImageUrl = busImageUrl
@@ -49,7 +50,6 @@ class Listing: ObservableObject, Identifiable {
         self.state = state
         self.title = title
         self.rating = rating
-        self.friends = friends
         self.openingHours = openingHours
         self.venueType = venueType
         self.venueMusic = venueMusic
@@ -88,11 +88,26 @@ class Listing: ObservableObject, Identifiable {
         let friendsGoing = goingUsers.map({Friend.from(object: $0)})
         let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
         
-        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: userAttendance, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, friends: 4, openingHours: [], venueType: venueType, venueMusic: venueMusic, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
+        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: friendsGoing.count, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, openingHours: [], venueType: venueType, venueMusic: venueMusic, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
        
     }
     
+    
+    
 }
+
+extension Array where Element == Listing {
+    
+    func filterBy(venueType: String, searchText: String) -> [Listing] {
+        if searchText.isEmpty {
+            return self.filter { $0.venueType.lowercased() == venueType }
+        } else {
+            return self.filter { $0.venueType.lowercased() == venueType && $0.title.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+}
+
+
 
 extension Listing: Equatable {
     static func == (lhs: Listing, rhs: Listing) -> Bool {
@@ -102,6 +117,6 @@ extension Listing: Equatable {
 
 extension Listing {
     static var preview: Listing {
-        Listing(id: "1", businessUid: "business1", busImageUrl: "busImageUrl", happyHour: "Happy Hour", userAttendance: 10, openHours: 8, latitude: -37.8136, longitude: 144.9631, imageURLs: [], address: "123 Street", city: "Sample City", state: "Sample State", title: "Sample Title", rating: 4.5, friends: 5, openingHours: [], venueType: "Bar", venueMusic: "Jazz")
+        Listing(id: "1", businessUid: "business1", busImageUrl: "busImageUrl", happyHour: "Happy Hour", userAttendance: 10, openHours: 8, latitude: -37.8136, longitude: 144.9631, imageURLs: [], address: "123 Street", city: "Sample City", state: "Sample State", title: "Sample Title", rating: 4.5, openingHours: [], venueType: "Bar", venueMusic: "Jazz")
     }
 }

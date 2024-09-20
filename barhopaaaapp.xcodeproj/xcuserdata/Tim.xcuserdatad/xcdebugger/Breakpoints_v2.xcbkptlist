@@ -255,7 +255,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
                   endingLineNumber = "86"
-                  offsetFromSymbolStart = "220">
+                  offsetFromSymbolStart = "187">
                </Location>
                <Location
                   uuid = "F7D55E1C-A31B-40B8-8DD5-64ACC0FB9C14 - 879b63836e5b665"
@@ -270,7 +270,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "86"
                   endingLineNumber = "86"
-                  offsetFromSymbolStart = "220">
+                  offsetFromSymbolStart = "187">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -541,8 +541,8 @@
             filePath = "TabBar/Listings/Models/Listing.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "userIsGoing"
             landmarkType = "24">
          </BreakpointContent>
@@ -737,6 +737,22 @@
                   offsetFromSymbolStart = "492">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B157DAC-4615-4581-BB08-C2A89BA555B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TabBar/Listings/Views/Search/ListingsSearchbarView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

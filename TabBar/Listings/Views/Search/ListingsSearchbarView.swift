@@ -9,25 +9,9 @@ struct ListingsSearchbarView: View {
     
         // arcopo
     /// need to observe these
-    var listings: [Listing] // Array of listings
-
-    // Computed properties to filter listings by venue type and search text
-    private var bars: [Listing] {
-        if searchText.isEmpty {
-            return listings.filter { $0.venueType.lowercased() == "bar" }
-        } else {
-            return listings.filter { $0.venueType.lowercased() == "bar" && $0.title.lowercased().contains(searchText.lowercased()) }
-        }
-    }
+    @EnvironmentObject var viewModel: ListingsViewModel
     
-    private var clubs: [Listing] {
-        if searchText.isEmpty {
-            return listings.filter { $0.venueType.lowercased() == "club" }
-        } else {
-            return listings.filter { $0.venueType.lowercased() == "club" && $0.title.lowercased().contains(searchText.lowercased()) }
-        }
-    }
-
+    
     var body: some View {
             NavigationView {
                 VStack(spacing: 0) {
@@ -66,10 +50,23 @@ struct ListingsSearchbarView: View {
                         SectionHeaderView(title: "Bar")
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
-                                ForEach(filteredListings(for: "bar"), id: \.id) { bar in
-//                                    NavigationLink(destination: ListingDetailView(listing: bar).navigationBarBackButtonHidden(true)) {
-//                                        ListingsSearchListingView(listing: bar)
-//                                    }
+                                ForEach(viewModel.listings.filterBy(venueType: "bar", searchText: searchText), id: \.id) { bar in
+                                    NavigationLink(destination: ListingDetailView(listing: Binding(get: {
+                                        bar
+                                    }, set: { newListing in
+                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
+                                            viewModel.listings[index] = newListing  // Update the selected listing
+                                        }
+                                    })).navigationBarBackButtonHidden(true)) {
+                                        ListingsSearchListingView(listing: Binding(
+                                                    get: { bar },
+                                                    set: { newListing in
+                                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
+                                                            viewModel.listings[index] = newListing
+                                                        }
+                                                    }
+                                                ))
+                                    }
                                 }
                             }
                         }
@@ -82,11 +79,24 @@ struct ListingsSearchbarView: View {
                         SectionHeaderView(title: "Club")
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
-                                ForEach(filteredListings(for: "club"), id: \.id) { club in
+                                ForEach(viewModel.listings.filterBy(venueType: "club", searchText: searchText), id: \.id) { club in
                                     
- //                                   NavigationLink(destination: ListingDetailView(listing: club).navigationBarBackButtonHidden(true)) {
- //                                       ListingsSearchListingView(listing: club)
- //                                   }
+                                    NavigationLink(destination: ListingDetailView(listing: Binding(get: {
+                                        club
+                                    }, set: { newListing in
+                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
+                                            viewModel.listings[index] = newListing  // Update the selected listing
+                                        }
+                                    })).navigationBarBackButtonHidden(true)) {
+                                        ListingsSearchListingView(listing: Binding(
+                                                    get: { club },
+                                                    set: { newListing in
+                                                        if let index = viewModel.listings.firstIndex(where: { $0.id == newListing.id }) {
+                                                            viewModel.listings[index] = newListing
+                                                        }
+                                                    }
+                                                ))
+                                    }
                                 }
                             }
                         }
@@ -104,13 +114,6 @@ struct ListingsSearchbarView: View {
             
         }
 
-        private func filteredListings(for venueType: String) -> [Listing] {
-            let filtered = listings.filter {
-                $0.venueType.lowercased() == venueType && (searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased()))
-            }
-            
-            return filtered
-        }
     
     }
 
@@ -128,8 +131,10 @@ struct ListingsSearchbarView: View {
         
     }
 
+/*
 struct ListingsSearchbarView_Previews: PreviewProvider {
     static var previews: some View {
         ListingsSearchbarView(listings: DeveloperPreview.shared.listings)
     }
 }
+*/
