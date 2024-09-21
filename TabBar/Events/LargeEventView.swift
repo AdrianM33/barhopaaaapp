@@ -9,6 +9,7 @@ struct LargeEventView: View {
     @EnvironmentObject var viewModel: EventListingsViewModel
     @ObservedObject var listing: EventListing
 //    @State private var isButtonPressed = false
+    @State private var showFriendsGoingOverlay = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -68,6 +69,12 @@ struct LargeEventView: View {
                 
                 FriendsGoingView(friendsGoing: listing.friendsGoing, maxVisibleFriends: 2)
                     .padding(.bottom, 5)
+                    .onTapGesture {
+                        withAnimation {
+                            showFriendsGoingOverlay.toggle()
+                        }
+                        
+                    }
 
                 HStack {
                     Image(systemName: "location.fill")
@@ -88,7 +95,9 @@ struct LargeEventView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.clear, lineWidth: 1.5)
-        )
+        ).sheet(isPresented: $showFriendsGoingOverlay) {
+            FriendsGoingOverlayView(friends: listing.friendsGoing) // Replace `mockFriendsGoing` with your actual data variable
+        }
     }
 }
 

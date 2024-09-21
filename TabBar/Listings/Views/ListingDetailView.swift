@@ -172,11 +172,15 @@ struct ListingDetailView: View {
                     
                     // arcopo
                     /// This mockFriends will be replaced by the real data from the database
+                    
+                    /*
+                     This shouldn't be here
                     if showFriendsGoingOverlay {
                         FriendsGoingOverlayView(friends: mockFriendsGoing)
                         // Add additional styling or positioning modifiers as needed
                             .transition(.move(edge: .top).combined(with: .opacity)) // Example of adding an animation
                     }
+                     */
                 }
                 EventDetailButtonView(listing: listing)
                     .padding(.top,-20)

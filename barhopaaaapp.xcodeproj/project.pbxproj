@@ -742,8 +742,8 @@
 				228E5B4A2C9ABBDF000EA081 /* EventsView.swift */,
 				228E5B462C9ABBCE000EA081 /* EventSpotlightButtons.swift */,
 				228E5B482C9ABBD6000EA081 /* LargeEventView.swift */,
-				228488F62C9C0E2F007036C3 /* FriendsGoingView.swift */,
 				228E5B4C2C9ABBEB000EA081 /* SmallEventView.swift */,
+				228488F62C9C0E2F007036C3 /* FriendsGoingView.swift */,
 				228E5B672C9AD457000EA081 /* Artist */,
 				6191788A2B90C2E900D90009 /* UnusedViews */,
 			);

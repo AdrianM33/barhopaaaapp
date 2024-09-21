@@ -10,6 +10,8 @@ struct SmallEventView: View {
     @EnvironmentObject var viewModel: EventListingsViewModel
     @ObservedObject var listing: EventListing
     
+    @State private var showFriendsGoingOverlay = false
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack(alignment: .topLeading) {
@@ -65,7 +67,12 @@ struct SmallEventView: View {
                     .padding(.top, 10)
                 
                 FriendsGoingView(friendsGoing: listing.friendsGoing, maxVisibleFriends: 2)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 10).onTapGesture {
+                        withAnimation {
+                            showFriendsGoingOverlay.toggle()
+                        }
+                        
+                    }
 
                 HStack {
                     Image(systemName: "location.fill")
@@ -86,7 +93,9 @@ struct SmallEventView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.clear, lineWidth: 1.5)
-        )
+        ).sheet(isPresented: $showFriendsGoingOverlay) {
+            FriendsGoingOverlayView(friends: listing.friendsGoing) // Replace `mockFriendsGoing` with your actual data variable
+        }
     }
 }
 

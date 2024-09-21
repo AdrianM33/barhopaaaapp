@@ -35,14 +35,32 @@ struct MapView: View {
                 ZStack(alignment: .bottom) {
                     Map(coordinateRegion: $region, annotationItems: viewModel.listings.filter { searchText.isEmpty || $0.title.lowercased().contains(searchText.lowercased()) }, annotationContent: { listing in
                         
+                        
                         MapAnnotation(coordinate: listing.coordinates) {
-                            Circle()
-                                .stroke(Color.blue, lineWidth: 8)
-                                .frame(width: 20, height: 20)
-                                .onTapGesture {
-                                    selectedListingIndex = viewModel.listings.firstIndex(of: listing)
+                            VStack {
+                                
+                                if selectedListingIndex == viewModel.listings.firstIndex(of: listing) {
+                                    Text(listing.title)
+                                        .font(.caption)
+                                        .padding(5)
+                                        .background(Color.white)
+                                        .cornerRadius(8)
+                                        .shadow(radius: 3)
                                 }
+                                
+                                
+                                Image(systemName: "mappin.circle.fill")
+                                    .foregroundColor(.red) // The native pin marker
+                                    .font(.title) // Adjust the size of the pin
+                                    .onTapGesture {
+                                        selectedListingIndex = viewModel.listings.firstIndex(of: listing)
+                                    }
+
+                                // This text shows the listing name when tapping the pin
+                                
+                            }
                         }
+                         
                     })
                     
                 
