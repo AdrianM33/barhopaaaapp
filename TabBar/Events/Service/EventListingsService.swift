@@ -52,9 +52,40 @@ class EventListingsService: ObservableObject {
             
             // Map the documents into EventListing array
             self.eventListings = snapshot.documents.compactMap { document -> EventListing? in
+                
+                //self.listenToListing(document: document)
                 return EventListing.from(document: document)
             }
             completion(self.eventListings)
+        }
+    }
+    
+    func listenToListing(document: QueryDocumentSnapshot){
+        let goingUsersRef = FirestoreConstants.EventListingsCollection.document(document.documentID).collection("goingUsers")
+        goingUsersRef.addSnapshotListener { goingUsersSnapshot, error in
+            guard let goingUserDocuments = goingUsersSnapshot?.documents else {
+                print("No goingUsers found")
+                return
+            }
+
+            var goingUsers: [Friend] = []
+            for userDocument in goingUserDocuments {
+                if let userData = userDocument.data() as? [String:String] {
+                    let friend = Friend.from(object: userData)
+                    goingUsers.append(friend)
+                }
+            }
+            if let index = self.eventListings.firstIndex(where: {$0.id == document.documentID}) {
+                self.eventListings[index].friendsGoing = goingUsers
+                Task {
+                    guard let currentUser = try await UserService().fetchCurrentUser() else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.eventListings[index].userIsGoing = self.eventListings[index].friendsGoing.contains(where: {$0.id == currentUser.id})
+                    }
+                }
+            }
         }
     }
     
@@ -70,7 +101,9 @@ class EventListingsService: ObservableObject {
  //       return true
        
         
-        let currentUser = try await UserService().fetchCurrentUser()
+        guard let currentUser = try await UserService().fetchCurrentUser() else {
+            return false
+        }
     
         let friendObject = Friend.userTofirebaseFriend(user: currentUser)
         
@@ -78,16 +111,43 @@ class EventListingsService: ObservableObject {
             try await FirestoreConstants.EventListingsCollection.document(listing.id).updateData([
                 "goingUsers": FieldValue.arrayUnion([friendObject])
             ])
+            print("User added successfully")
         } else {
-            try await FirestoreConstants.EventListingsCollection.document(listing.id).updateData([
+            /*try await FirestoreConstants.EventListingsCollection.document(listing.id).updateData([
                 "goingUsers": FieldValue.arrayRemove([friendObject])
-            ])
+            ])*/
+            try await removeUserById(listingId: listing.id, userId: currentUser.id)
+            print("User removed successfully")
         }
-        print("User added successfully")
+        
         return true
          
     }
     
-    // arcopo
-    /// Here we can add functions to add me to a listing, and remove me from going to a listing
+    func removeUserById(listingId: String, userId: String) async throws {
+        
+        // could be improved
+        let documentRef = FirestoreConstants.EventListingsCollection.document(listingId)
+        
+        // Step 1: Get the current document data
+        let snapshot = try await documentRef.getDocument()
+        
+        // Step 2: Get the 'goingUsers' array and filter out the user with the matching id
+        if var goingUsers = snapshot.data()?["goingUsers"] as? [[String: Any]] {
+            
+            // Filter the array to exclude the user with the matching id
+            goingUsers.removeAll { user in
+                if let userId = user["id"] as? String {
+                    return userId == userId
+                }
+                return false
+            }
+            
+            // Step 3: Update the Firestore document with the filtered array
+            try await documentRef.updateData([
+                "goingUsers": goingUsers
+            ])
+        }
+    }
+    
 }

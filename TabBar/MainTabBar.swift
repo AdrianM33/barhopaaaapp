@@ -29,8 +29,7 @@ struct MainTabBar: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             // Pass exploreViewModel to HomeView explicitly
-            ListingsView() // Adjusted line
-                .environmentObject(locationViewModel)
+            ListingsView(viewModel: listingsViewModel) // Adjusted line
                 .tabItem {
                     VStack {
                         Image(selectedTab == 0 ? "home2" : "home1")
@@ -48,7 +47,7 @@ struct MainTabBar: View {
                 .environmentObject(locationViewModel)
             
             // Events
-            EventsView()
+            EventsView(viewModel: eventListingsViewModel)
                 .tabItem {
                     VStack {
                         Image( selectedTab == 1 ?"ticket1" : "ticket")

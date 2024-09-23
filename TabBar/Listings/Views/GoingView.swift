@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GoingView: View {
     
-    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var viewModel: ListingsViewModel
     var listing: Listing
     
     // arcopo

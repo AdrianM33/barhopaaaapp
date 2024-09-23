@@ -18,13 +18,14 @@ class AuthService: ObservableObject{
     func updateUserSession(){
         self.userSession = Auth.auth().currentUser
     }
-    func login(withEmail email: String,password:String)async throws{
+    func login(withEmail email: String,password:String) async throws{
         do{
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             print("DEBUG: User is \(result.user.uid)")
         }catch {
             print("DEBUG: Failed to create user with error: \(error.localizedDescription)")
+            
             throw error
         }
         

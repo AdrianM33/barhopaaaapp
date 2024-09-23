@@ -3,7 +3,7 @@ import SwiftUI
 struct ListingsView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var viewModel: ListingsViewModel
     
     var body: some View {
         ZStack {
@@ -17,7 +17,7 @@ struct ListingsView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: ListingsSearchbarView().environmentObject(viewModel).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: ListingsSearchbarView(viewModel:viewModel).navigationBarBackButtonHidden(true)) {
                             Image(systemName: "magnifyingglass")
                                 .resizable()
                                 .frame(width: 25, height: 25)
@@ -57,16 +57,16 @@ struct ListingsView: View {
                             ForEach($viewModel.listings) { $listing in
                                 
                                 NavigationLink(
-                                    destination: ListingDetailView(listing: $listing)
-                                        .environmentObject(viewModel)
+                                    destination: ListingDetailView(viewModel:viewModel, listing: $listing)
+                           
                                         .navigationBarHidden(true),
                                         
                                     label: {
-                                        ListingRowView(listing: $listing)
+                                        ListingRowView(viewModel:viewModel, listing: $listing)
                                             .frame(height: 200)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .shadow(color: Color.black.opacity(0.2), radius: 6, x: 0, y: 10)
-                                            .environmentObject(viewModel)
+                            
                                     }
                                 )
                             }

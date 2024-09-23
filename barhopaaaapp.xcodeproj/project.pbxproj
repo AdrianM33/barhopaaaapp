@@ -303,6 +303,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220DFAFD2C9FFF0100F39BF2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				228E5B462C9ABBCE000EA081 /* EventSpotlightButtons.swift */,
+				228E5B482C9ABBD6000EA081 /* LargeEventView.swift */,
+				228E5B4C2C9ABBEB000EA081 /* SmallEventView.swift */,
+				228488F62C9C0E2F007036C3 /* FriendsGoingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		228488F22C9B47F0007036C3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,10 +630,11 @@
 		61B0A5A12B80D72500AFAC41 /* Listings */ = {
 			isa = PBXGroup;
 			children = (
+				61B0A59B2B80D72500AFAC41 /* ListingsView.swift */,
+				61B0A5C02B80D72500AFAC41 /* Views */,
 				61B0A5C12B80D72500AFAC41 /* Models */,
 				61B0A5A22B80D72500AFAC41 /* ViewModel */,
 				61B0A5A52B80D72500AFAC41 /* Service */,
-				61B0A5C02B80D72500AFAC41 /* Views */,
 			);
 			path = Listings;
 			sourceTree = "<group>";
@@ -711,9 +723,8 @@
 		61B0A5C02B80D72500AFAC41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				61B0A59B2B80D72500AFAC41 /* ListingsView.swift */,
-				61B0A6032B80D95900AFAC41 /* ListingRowView.swift */,
 				619178952B99F2A400D90009 /* ListingDetailView.swift */,
+				61B0A6032B80D95900AFAC41 /* ListingRowView.swift */,
 				612089842BA17E4800AA2A74 /* FriendsGoingOverlayView.swift */,
 				612089642B9DD05900AA2A74 /* GoingView.swift */,
 				228E5B812C9B1983000EA081 /* Search */,
@@ -736,14 +747,11 @@
 		61B0A5CB2B80D72500AFAC41 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				228E5B4A2C9ABBDF000EA081 /* EventsView.swift */,
 				228E5B7E2C9B101F000EA081 /* Model */,
 				228488F52C9B4966007036C3 /* ViewModel */,
 				228488F22C9B47F0007036C3 /* Service */,
-				228E5B4A2C9ABBDF000EA081 /* EventsView.swift */,
-				228E5B462C9ABBCE000EA081 /* EventSpotlightButtons.swift */,
-				228E5B482C9ABBD6000EA081 /* LargeEventView.swift */,
-				228E5B4C2C9ABBEB000EA081 /* SmallEventView.swift */,
-				228488F62C9C0E2F007036C3 /* FriendsGoingView.swift */,
+				220DFAFD2C9FFF0100F39BF2 /* Views */,
 				228E5B672C9AD457000EA081 /* Artist */,
 				6191788A2B90C2E900D90009 /* UnusedViews */,
 			);

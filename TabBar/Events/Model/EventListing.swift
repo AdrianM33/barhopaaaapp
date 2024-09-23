@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 // Struct for event listing
-class EventListing: ObservableObject, Identifiable {
+struct EventListing: Identifiable {
     
     static func == (lhs: EventListing, rhs: EventListing) -> Bool {
         return lhs.id == rhs.id
@@ -31,27 +31,12 @@ class EventListing: ObservableObject, Identifiable {
     
     var isLiked: Bool
     var friendsGoing: [Friend]
-    @Published var userIsGoing: Bool = false {
+    var userIsGoing: Bool = false {
         didSet {
             
         }
     }
-    
-    init(id: String, username: String, followers: String, following: String, imageURL: String, title: String, date: String, location: String, price: String, time: String, isLiked: Bool, userIsGoing: Bool = false, friendsGoing: [Friend] = []) {
-        self.id = id
-        self.username = username
-        self.followers = followers
-        self.following = following
-        self.imageURL = imageURL
-        self.title = title
-        self.date = date
-        self.location = location
-        self.price = price
-        self.time = time
-        self.isLiked = isLiked
-        self.userIsGoing = userIsGoing
-        self.friendsGoing = friendsGoing
-    }
+ 
     
     static func from(document:QueryDocumentSnapshot) -> EventListing? {
         
@@ -78,7 +63,7 @@ class EventListing: ObservableObject, Identifiable {
         // arcopo
         /// Only show if not me and my friend
         ///
-        return EventListing(id: document.documentID, username: username, followers: followers, following: following, imageURL: imageURL, title: title, date: date, location: location, price: price, time: time, isLiked: true, userIsGoing: userIsGoing, friendsGoing: friendsGoing)
+        return EventListing(id: document.documentID, username: username, followers: followers, following: following, imageURL: imageURL, title: title, date: date, location: location, price: price, time: time, isLiked: true, friendsGoing: friendsGoing, userIsGoing: userIsGoing)
         
     }
 }

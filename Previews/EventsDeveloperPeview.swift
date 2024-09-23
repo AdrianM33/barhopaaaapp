@@ -23,7 +23,9 @@ class EventPreview {
             location:"14 Windsor Road",
             price: "$10",
             time: "10pm - 2am",
-            isLiked: false
+            isLiked: false,
+            friendsGoing: [],
+            userIsGoing: false
         ),
         EventListing(
             id: UUID().uuidString,
@@ -36,7 +38,9 @@ class EventPreview {
             location: "Gallery XYZ",
             price: "$15",
             time: "9pm - 12pm",
-            isLiked: true
+            isLiked: true,
+            friendsGoing: [],
+            userIsGoing: false
         ),
         EventListing(
             id: UUID().uuidString,
@@ -49,7 +53,9 @@ class EventPreview {
             location: "375 Flinders St",
             price: "$15",
             time: "10pm - 1am",
-            isLiked: true
+            isLiked: true,
+            friendsGoing: [],
+            userIsGoing: false
         ),
         EventListing(
             id: UUID().uuidString,
@@ -62,7 +68,9 @@ class EventPreview {
             location: "101 Flinders Ln",
             price: "Free",
             time: "8pm - 2am",
-            isLiked: true
+            isLiked: true,
+            friendsGoing: [],
+            userIsGoing: false
         ),
         EventListing(
             id: UUID().uuidString,
@@ -75,7 +83,9 @@ class EventPreview {
             location: "366 Russell St",
             price: "$10",
             time: "All Night",
-            isLiked: false
+            isLiked: false,
+            friendsGoing: [],
+            userIsGoing: false
         ),
         EventListing(
             id: UUID().uuidString,
@@ -88,7 +98,9 @@ class EventPreview {
             location: "13 Oak St",
             price: "$150",
             time: "10am - 11pm",
-            isLiked: true
+            isLiked: true,
+            friendsGoing: [],
+            userIsGoing: false
         )
     ]
 }

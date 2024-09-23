@@ -44,11 +44,13 @@ struct FriendsGoingView: View {
                 .padding(.leading, CGFloat(-25))
             }
 
-            Text("People going")
-                .font(.headline)
-                .fontWeight(.medium)
-                .foregroundColor(.gray)
-                .padding(.leading, 0)
+            if friendsGoing.count > 0 {
+                Text("People going")
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 0)
+            }
         }
         
     }

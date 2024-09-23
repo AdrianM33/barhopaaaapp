@@ -6,8 +6,10 @@ struct EventSpotlightButtons: View {
     
     @State private var selectedButton: String = "Upcoming"
     
+    // arcopo
+    // this state objet just should change to observed or environment
     @StateObject var locationViewModel = LocationViewModel()
-    @StateObject var viewModel: EventListingsViewModel
+    @ObservedObject var viewModel: EventListingsViewModel
     
     var body: some View {
         VStack {

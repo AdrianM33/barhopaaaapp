@@ -9,7 +9,7 @@ struct ListingsSearchbarView: View {
     
         // arcopo
     /// need to observe these
-    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var viewModel: ListingsViewModel
     
     var clubs: [Binding<Listing>] {
         return $viewModel.listings.filter({$0.wrappedValue.venueType == "Club" && (searchText.isEmpty || $0.wrappedValue.title.lowercased().contains(searchText.lowercased()))})
@@ -57,7 +57,7 @@ struct ListingsSearchbarView: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(spacing: 10) {
                                 ForEach(bars, id: \.id) { $bar in
-                                    NavigationLink(destination: ListingDetailView(listing: $bar).navigationBarBackButtonHidden(true)) {
+                                    NavigationLink(destination: ListingDetailView(viewModel:viewModel, listing: $bar).navigationBarBackButtonHidden(true)) {
                                         ListingsSearchListingView(listing: $bar)
                                     }
                                 }
@@ -74,7 +74,7 @@ struct ListingsSearchbarView: View {
                             VStack(spacing: 10) {
                                 ForEach(clubs, id: \.id) { $club in
                                     
-                                    NavigationLink(destination: ListingDetailView(listing: $club).navigationBarBackButtonHidden(true)) {
+                                    NavigationLink(destination: ListingDetailView(viewModel:viewModel, listing: $club).navigationBarBackButtonHidden(true)) {
                                         ListingsSearchListingView(listing: $club)
                                     }
                                 }

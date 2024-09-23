@@ -7,7 +7,7 @@ import Kingfisher
 struct LargeEventView: View {
     
     @EnvironmentObject var viewModel: EventListingsViewModel
-    @ObservedObject var listing: EventListing
+    var listing: EventListing
 //    @State private var isButtonPressed = false
     @State private var showFriendsGoingOverlay = false
     
@@ -100,9 +100,10 @@ struct LargeEventView: View {
         }
     }
 }
-
+/*
 struct LargeEventView_Previews: PreviewProvider {
     static var previews: some View {
         LargeEventView(listing: EventPreview.shared.events[0])
     }
 }
+*/

@@ -8,7 +8,7 @@ import Kingfisher
 struct SmallEventView: View {
     
     @EnvironmentObject var viewModel: EventListingsViewModel
-    @ObservedObject var listing: EventListing
+    var listing: EventListing
     
     @State private var showFriendsGoingOverlay = false
     
@@ -99,9 +99,11 @@ struct SmallEventView: View {
     }
 }
 
+/*
 struct SmallEventView_Previews: PreviewProvider {
     static var previews: some View {
         SmallEventView(listing: EventPreview.shared.events[0])
     }
 }
 
+*/

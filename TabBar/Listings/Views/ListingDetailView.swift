@@ -6,6 +6,7 @@ import Kingfisher
 /// This is the listing detail view that shows up when a user taps on the listing on the homepage
 ///
 struct ListingDetailView: View {
+    
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
@@ -16,9 +17,8 @@ struct ListingDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var viewModel: ListingsViewModel
     @Binding var listing: Listing
-    //@StateObject var listing: Listing
     
     var body: some View {
         
@@ -64,10 +64,9 @@ struct ListingDetailView: View {
                     // GoingView added to the top right
                     HStack {
                         Spacer()
-                        GoingView(listing: listing) // Your GoingView component
+                        GoingView(viewModel: viewModel, listing: listing) // Your GoingView component
                             .padding(.top, -25)
                             .padding(.trailing, 20)
-                            .environmentObject(viewModel)
                     }
                 }
                 .frame(height: 500)

@@ -61,7 +61,9 @@ class ListingsService: ObservableObject {
         // Example (Firestore):
         //return true
  
-        let currentUser = try await UserService().fetchCurrentUser()
+        guard let currentUser = try await UserService().fetchCurrentUser() else {
+            return false
+        }
     
         let friendObject = Friend.userTofirebaseFriend(user: currentUser)
         
@@ -69,13 +71,42 @@ class ListingsService: ObservableObject {
             try await FirestoreConstants.ListingsCollection.document(listing.id).updateData([
                 "goingUsers": FieldValue.arrayUnion([friendObject])
             ])
+            print("User added successfully")
         } else {
-            try await FirestoreConstants.ListingsCollection.document(listing.id).updateData([
+            /*try await FirestoreConstants.ListingsCollection.document(listing.id).updateData([
                 "goingUsers": FieldValue.arrayRemove([friendObject])
-            ])
+            ])*/
+            try await removeUserById(listingId: listing.id, userId: currentUser.id)
+            print("User removed successfully")
         }
-        print("User added successfully")
+        
         return true
          
+    }
+    
+    func removeUserById(listingId: String, userId: String) async throws {
+        
+        // could be improved 
+        let documentRef = FirestoreConstants.ListingsCollection.document(listingId)
+        
+        // Step 1: Get the current document data
+        let snapshot = try await documentRef.getDocument()
+        
+        // Step 2: Get the 'goingUsers' array and filter out the user with the matching id
+        if var goingUsers = snapshot.data()?["goingUsers"] as? [[String: Any]] {
+            
+            // Filter the array to exclude the user with the matching id
+            goingUsers.removeAll { user in
+                if let userId = user["id"] as? String {
+                    return userId == userId
+                }
+                return false
+            }
+            
+            // Step 3: Update the Firestore document with the filtered array
+            try await documentRef.updateData([
+                "goingUsers": goingUsers
+            ])
+        }
     }
 }

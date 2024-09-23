@@ -39,29 +39,33 @@ struct MapView: View {
                         MapAnnotation(coordinate: listing.coordinates) {
                             VStack {
                                 
-                                if selectedListingIndex == viewModel.listings.firstIndex(of: listing) {
-                                    Text(listing.title)
-                                        .font(.caption)
-                                        .padding(5)
-                                        .background(Color.white)
-                                        .cornerRadius(8)
-                                        .shadow(radius: 3)
-                                }
+                                
                                 
                                 
                                 Image(systemName: "mappin.circle.fill")
                                     .foregroundColor(.red) // The native pin marker
                                     .font(.title) // Adjust the size of the pin
                                     .onTapGesture {
-                                        selectedListingIndex = viewModel.listings.firstIndex(of: listing)
+                                        region.center = listing.coordinates
+                                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1, execute: {
+                                            selectedListingIndex = viewModel.listings.firstIndex(of: listing)
+                                            
+                                            region.center = listing.coordinates
+                                        })
                                     }
 
                                 // This text shows the listing name when tapping the pin
                                 
-                            }
+                            }.fixedSize(horizontal: false, vertical: true) // Prevents clipping
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                          
                     })
+                    .onTapGesture {
+                        if selectedListingIndex != nil {
+                            selectedListingIndex = nil
+                        }
+                    }
                     
                 
                     /*
@@ -81,8 +85,7 @@ struct MapView: View {
                 }
                 .fullScreenCover(isPresented: $showDetails) {
                     if let selectedListingIndex {
-                        ListingDetailView(listing: $viewModel.listings[selectedListingIndex])
-                        .environmentObject(viewModel)
+                        ListingDetailView(viewModel: viewModel, listing: $viewModel.listings[selectedListingIndex])
                     }
                 }
                 

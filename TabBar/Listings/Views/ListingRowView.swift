@@ -3,7 +3,7 @@ import Kingfisher
 
 struct ListingRowView: View {
     
-    @EnvironmentObject var viewModel: ListingsViewModel
+    @ObservedObject var viewModel: ListingsViewModel
     @Binding var listing: Listing
     
     var body: some View {
