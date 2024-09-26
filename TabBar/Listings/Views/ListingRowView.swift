@@ -81,11 +81,13 @@ struct ListingRowView: View {
                 HStack(spacing: 4) {
                     
                     if let first = listing.friendsGoing.first {
-                        KFImage(URL(string: first.imageName))
+                       
+                        KFImage(URL(string: first.imageName ?? "https://img.icons8.com/?size=60&id=77883&format=png"))
                             .resizable()
                             .scaledToFill()
                             .frame(width: 30, height: 30)
                             .clipShape(Circle())
+                            //.background(Color.gray)
                             .foregroundColor(.black)
                     }
                     

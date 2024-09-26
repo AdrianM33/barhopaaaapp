@@ -19,12 +19,13 @@ struct Friend: Identifiable, Equatable {
     
     var id: String
     var name: String
-    var imageName: String
+    var imageName: String?
     
-    static func from(object: [String:String]) -> Friend {
+    static func from(object: [String:String?]) -> Friend {
+        
         return Friend(
-            id: object["id"] ?? "",
-            name: object["username"] ?? "",
+            id: (object["id"] ?? "") ?? "",
+            name: (object["username"] ?? "") ?? "",
             imageName: object["profileImageURL"] ?? ""
         )
     }

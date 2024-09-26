@@ -57,14 +57,29 @@ struct EventListing: Identifiable {
             return nil
         }
         
-        let goingUsers = data["goingUsers"] as? [[String:String]] ?? []
-        let friendsGoing = goingUsers.map({Friend.from(object: $0)})
-        let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
-        // arcopo
-        /// Only show if not me and my friend
-        ///
+        let goingUsers = data["goingUsers"] as? [[String:String?]] ?? []
+        let totalGoing = goingUsers.map({Friend.from(object: $0)})
+        let friendsGoing = totalGoing.filter({$0.id != UserService().localCurrentUserId()})
+        // needs an extra filter based on friends
+        let userIsGoing = totalGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
+ 
         return EventListing(id: document.documentID, username: username, followers: followers, following: following, imageURL: imageURL, title: title, date: date, location: location, price: price, time: time, isLiked: true, friendsGoing: friendsGoing, userIsGoing: userIsGoing)
         
+    }
+    
+    // Convert the struct to a dictionary
+    func toDictionary() -> [String: Any] {
+        return [
+            "username": username,
+            "followers": followers,
+            "following": following,
+            "imageURL": imageURL,
+            "title": title,
+            "date": date,
+            "location": location,
+            "price": price,
+            "time": time
+        ]
     }
 }
 

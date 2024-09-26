@@ -70,7 +70,7 @@ class EventListingsService: ObservableObject {
 
             var goingUsers: [Friend] = []
             for userDocument in goingUserDocuments {
-                if let userData = userDocument.data() as? [String:String] {
+                if let userData = userDocument.data() as? [String:String?] {
                     let friend = Friend.from(object: userData)
                     goingUsers.append(friend)
                 }
@@ -133,12 +133,12 @@ class EventListingsService: ObservableObject {
         let snapshot = try await documentRef.getDocument()
         
         // Step 2: Get the 'goingUsers' array and filter out the user with the matching id
-        if var goingUsers = snapshot.data()?["goingUsers"] as? [[String: Any]] {
+        if var goingUsers = snapshot.data()?["goingUsers"] as? [[String: String?]] {
             
             // Filter the array to exclude the user with the matching id
             goingUsers.removeAll { user in
-                if let userId = user["id"] as? String {
-                    return userId == userId
+                if let goingUserId = user["id"] as? String {
+                    return goingUserId == userId
                 }
                 return false
             }

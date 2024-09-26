@@ -15,6 +15,7 @@
 import FirebaseAuth
 
 struct User: Identifiable, Codable {
+    
     let id: String
     var username: String
     let email: String
@@ -29,6 +30,9 @@ struct User: Identifiable, Codable {
         return id == Auth.auth().currentUser?.uid
     }
     
+    var followers: [String]
+    var following: [String]
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
@@ -39,6 +43,10 @@ struct User: Identifiable, Codable {
         self.profileImageUrl = try container.decodeIfPresent(String.self, forKey: .profileImageUrl)
         self.isFollowed = try container.decodeIfPresent(Bool.self, forKey: .isFollowed) ?? false
         self.stats = try container.decodeIfPresent(UserStats.self, forKey: .stats) ?? UserStats(following: 0, followers: 0, likes: 0)
+        
+        self.followers = try container.decodeIfPresent([String].self, forKey: .followers) ?? []
+        self.following = try container.decodeIfPresent([String].self, forKey: .following) ?? []
+        
     }
     
     init(id: String, username: String, email: String, fullname: String, bio: String? = nil, profileImageUrl: String? = nil) {
@@ -50,6 +58,8 @@ struct User: Identifiable, Codable {
         self.profileImageUrl = profileImageUrl
         self.isFollowed = false
         self.stats = .init(following: 0, followers: 0, likes: 0)
+        self.followers=[]
+        self.following=[]
     }
 }
 

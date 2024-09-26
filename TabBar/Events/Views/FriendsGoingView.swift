@@ -19,7 +19,7 @@ struct FriendsGoingView: View {
             ForEach(friendsGoing.prefix(maxVisibleFriends), id: \.id) { friend in
                 let index = friendsGoing.firstIndex(of: friend) ?? 0
                 ZStack {
-                    KFImage(URL(string: friend.imageName))
+                    KFImage(URL(string: friend.imageName ?? "https://img.icons8.com/?size=60&id=77883&format=png"))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 40, height: 40)

@@ -406,22 +406,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C9E37381-9F64-43BB-B23E-2396FFA0CB59"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TabBar/Listings/Service/ListingsService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "fetchListings(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "530460CC-9FE9-40F9-9BCF-D1E403EC3DD1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -934,16 +918,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5CD14FD4-5E78-4433-A714-D34BB58F4683"
-            shouldBeEnabled = "Yes"
+            uuid = "0702A027-1D99-4B93-A83C-F5334D6920BA"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TabBar/Events/Model/EventListing.swift"
+            filePath = "TabBar/Listings/Models/Friend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "from(document:)"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "from(object:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

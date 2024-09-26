@@ -65,12 +65,13 @@ struct Listing: Identifiable {
             return nil
         }
         
-        let goingUsers = data["goingUsers"] as? [[String:String]] ?? []
+        let goingUsers = data["goingUsers"] as? [[String:String?]] ?? []
+        let totalGoing = goingUsers.map({Friend.from(object: $0)})
+        let friendsGoing = totalGoing.filter({$0.id != UserService().localCurrentUserId()})
+        // needs an extra filter based on friends
+        let userIsGoing = totalGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
         
-        let friendsGoing = goingUsers.map({Friend.from(object: $0)})
-        let userIsGoing = friendsGoing.contains(where: { $0.id == UserService().localCurrentUserId() })
-        
-        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: friendsGoing.count, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, openingHours: [], venueType: venueType, venueMusic: venueMusic, friendsGoing: friendsGoing, userIsGoing: userIsGoing)
+        return Listing(id: document.documentID, businessUid: businessUid, busImageUrl: busImageUrl, happyHour: happyHour, userAttendance: totalGoing.count, openHours: openHours, latitude: latitude, longitude: longitude, imageURLs: imageURLs, address: address, city: city, state: state, title: title, rating: rating, openingHours: [], venueType: venueType, venueMusic: venueMusic, friendsGoing: friendsGoing, userIsGoing: userIsGoing)
        
     }
     

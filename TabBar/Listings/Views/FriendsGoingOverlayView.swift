@@ -23,7 +23,7 @@ struct FriendsGoingOverlayView: View {
                 ForEach(friends) { friend in
                     
                     HStack {
-                        KFImage(URL(string: friend.imageName)) // Ensure the image names correspond to actual assets in your project
+                        KFImage(URL(string: friend.imageName ?? "")) // Ensure the image names correspond to actual assets in your project
                             .resizable()
                             .scaledToFill()
                             .frame(width: 45, height: 45)
