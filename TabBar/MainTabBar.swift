@@ -119,5 +119,6 @@ struct MainTabBar: View {
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabBar(authService: AuthService(), user: DeveloperPreview.shared.user)
+            .environmentObject(LocationViewModel())
     }
 }
